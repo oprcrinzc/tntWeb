@@ -42,8 +42,6 @@ const Texts = {
 
 export default function Order(props:OrderProps){
 
-	props.lang = props.lang == null ? "en": props.lang
-
 	const [name, setName] = useState("")
 	const [pwd, setPwd] = useState("")
     

@@ -11,6 +11,7 @@ import {Lang} from "@/app/types/types"
 
 
 
+
 export default function Home() {
 	const [token, setToken] = useState("")
 	const [lang, setLang] = useState<Lang>("en")
@@ -32,6 +33,7 @@ export default function Home() {
 		<div className={Mc.Home}>
 			<Login token={token} lang={lang} name={name}/>
 			<Order token={token} lang={lang}/>
+			
 		</div>
 	</div>
   );

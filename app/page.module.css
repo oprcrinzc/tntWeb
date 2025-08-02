@@ -101,3 +101,50 @@
 .Darker {
     filter: brightness(60%);
 }
+
+
+
+/* Selector */
+.Sel {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+
+}
+.Sel > * {
+    padding: 0;
+    margin: 0;
+    user-select: none;
+}
+.Sel > *:hover {
+    cursor: pointer;
+    backdrop-filter: brightness(60%);
+    color: aliceblue;
+}
+.SelDark {backdrop-filter: brightness(80%);}
+.SelBright {backdrop-filter: brightness(100%);}
+
+
+/* Group */
+.GroupCol {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: .2rem;
+    justify-content: left;
+}
+.GroupCol > * {
+    display: flex;
+}
+.GroupCol > * p {
+    padding: 0rem .3rem;
+    text-align: start;
+}
+.GroupCol .Topic {
+    display: flex;
+    flex-direction: column;
+}
+.GroupCol .Topic > * {
+    flex-grow: 1;
+    align-content: center;
+}
