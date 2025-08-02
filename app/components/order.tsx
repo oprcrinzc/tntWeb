@@ -2,16 +2,38 @@
 
 import { useState } from "react"
 import Swal from "sweetalert2"
+import Mc from "@/app/page.module.css"
 
 type OrderPeops = {
     token: string
+    lang: string
+}
+
+const Texts = {
+    "chooseFile": {
+        "en": "Choose File",
+        "th": "เลือกไฟล์"
+    },
+    "detail": {
+        "en": "Details",
+        "th": "รายละเอียด"
+    },
+    "send": {
+        "en": "Send",
+        "th": "ส่ง"
+    },
 }
 
 export default function Order(props:OrderPeops){
     
+    if (props.lang == null) {
+        props.lang = "en"
+    }
+
     const [file, setFile]= useState<File|null>(null)
     
     const [cnt, setCnt]= useState("")
+
     const orderHandle = async (e:React.FormEvent) => {
             e.preventDefault()
             
@@ -42,14 +64,19 @@ export default function Order(props:OrderPeops){
             })
     
         }
-    return (<div>
+
+    return (<div className={Mc.Card}>
             <h1>Order</h1>
 			<form onSubmit={orderHandle}>
 				<input type="file" name="file" id="" 
                 onChange={(e)=>{setFile(e.target.files?.[0] ?? null)}}/>
-				<input type="text" name="cnt" id="" placeholder="order" 
-				onChange={(e)=>{setCnt(e.target.value)}}/>
-				<input type="submit" value="Send" />
+
+                <label htmlFor="order">{Texts['detail'][props.lang]}</label>
+
+				<textarea name="cnt" id="order" placeholder="..."
+                onChange={(e)=>{setCnt(e.target.value)}}/>
+				
+                <input type="submit" value="Send" />
 			</form>
             
     </div>)

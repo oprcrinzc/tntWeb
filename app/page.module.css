@@ -1,0 +1,72 @@
+.Card > * {
+    margin: 0;
+    padding: 0;
+}
+.Card {
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+    color: rgb(42, 117, 117);
+    padding: .5rem 1rem 1rem;
+}
+.Card input {
+    border: none;
+}
+.Card input[type="file"]::file-selector-button {
+    padding: .4rem;
+    font-size: 1.1rem;
+    background-color: antiquewhite;
+    border: .12rem solid black;
+    margin-right: 1.5rem;
+}
+.Card input[type="file"] {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    /* font-size: 1rem; */
+    width: fit-content;
+}
+.Card form {
+    display: flex;
+    gap: .2rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: .12rem solid black;
+    background-color: rgb(118, 199, 202);
+    padding: .4rem;
+    align-items: c;
+}
+.Card form textarea{
+    font-size: 1.5rem;
+    border: 0;
+    outline: 0;
+    max-width: 100%;
+    resize: vertical;
+}
+.Card form label {
+    background-color: azure;
+    padding: 0 .2rem;
+}
+.Card form input[type="submit"] {
+    background-color: antiquewhite;
+    outline: none;
+    border: .1rem solid black;
+    font-size: 1.6rem;
+    width: fit-content;
+    align-self: flex-end;
+}
+
+.Home {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+.Container {
+    align-items: center;
+    padding: 1rem 1rem;
+}
+
+.Login input{
+    font-size: 1.5rem;
+}

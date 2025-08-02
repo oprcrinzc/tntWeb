@@ -4,40 +4,15 @@ import styles from "./page.module.css";
 import React, { useEffect, useState } from "react";
 import { Content } from "next/font/google";
 import Order from "./components/order";
+import Login from "./components/login"
 import Swal from "sweetalert2";
+import Mc from "@/app/page.module.css"
+
 
 export default function Home() {
 	const [token, setToken] = useState("")
-	const [name, setName] = useState("")
-	const [pwd, setPwd] = useState("")
-	
 
-	const handle = async (e:React.FormEvent) => {
-		e.preventDefault()
-		try {
-			const res = await fetch("https://3d.pluemtnt.com/login", {
-				method: "POST",
-				headers: {
-					"Content-Type":"application/json"
-				},
-				body: JSON.stringify({
-					Name: name,
-					Password: pwd,
-				})
-			})
-
-			if (!res.ok) throw new Error("server error")
-			const data = await res.json()
-		localStorage.setItem("token", data)
-			setToken(data)
-
-		} catch(err) {
-			console.log(err)
-			setToken("")
-		}
-	}
-
-	
+	const [lang, setLang] = useState("en")
 
 	useEffect(()=>{
 		const localToken = localStorage.getItem("token")
@@ -47,22 +22,11 @@ export default function Home() {
 	}, [])
 
   return (
-	<div>
-		{ token == "" ? <div><p>Login</p>
-		<form onSubmit={handle}>
-			<input type="text" name="" id="" 
-			onChange={(e)=>{
-				setName(e.target.value)
-			}}/>
-			<input type="password" name="" id="" 
-			onChange={(e)=>{
-				setPwd(e.target.value)
-			}}/>
-			<input type="submit" value="" />
-		</form></div> : ""
-		}
-		<h1>{token}</h1>
-		<Order token={token}/>
-   	</div>
+	<div className={Mc.Container}>
+		<div className={Mc.Home}>
+			<Login token={token} lang={lang}/>
+			<Order token={token} lang={lang}/>
+		</div>
+	</div>
   );
 }
