@@ -24,7 +24,7 @@ export default function Order(props:OrderPeops){
                 return
             }
             // console.log(fd)
-            const res = await fetch("http://127.0.0.1:7200/order", {
+            const res = await fetch("https://3d.pluemtnt.com/order", {
                 method: "POST",
                 headers: {
                     // "Content-Type":"application/json",
