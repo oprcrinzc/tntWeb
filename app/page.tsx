@@ -23,7 +23,7 @@ export default function Home() {
 			const localToken = localStorage.getItem("token")
 			setToken(localToken != null ? localToken : "")
 			setName(localName != null ? localName : "")
-			console.log("finding")
+			// console.log("finding")
 		}, 199)
 		
 	}, [])

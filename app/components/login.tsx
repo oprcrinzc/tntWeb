@@ -47,7 +47,7 @@ export default function Order(props:OrderProps){
     
 	const ExitHandle = async () => {
 		console.log("Exittt")
-		localStorage.removeItem("token")
+		localStorage.clear()
 	}
     const handle = async (e:React.FormEvent) => {
 		e.preventDefault()

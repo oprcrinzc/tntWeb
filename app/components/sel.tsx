@@ -13,14 +13,18 @@ type SelProps ={
 export default function Sel(props:SelProps){
     const [seled, SetSeled] = useState(-1)
     const handle = (i:number, k:string) =>{
+            // console.log(seled)
         SetSeled(i)
         localStorage.setItem(props.name, k)
         localStorage.setItem(props.name+"_seled", i.toString())
     }
     useEffect(()=>{
+        localStorage.setItem(props.name, "")
+        localStorage.setItem(props.name+"_seled", (-1).toString())
         setInterval(()=>{
             let localSeled = localStorage.getItem(props.name+"_seled")
             SetSeled(isNaN(Number(localSeled)) ? -1 : Number(localSeled))
+            // console.log(Number(localSeled))
         },99)
     },[])
     return (<div>
@@ -39,6 +43,8 @@ export default function Sel(props:SelProps){
                         {value[props.lang]}</p>
                 </div>
             })
+            
         }
+        
     </div>)
 }

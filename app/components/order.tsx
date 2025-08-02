@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Swal from "sweetalert2"
 import Mc from "@/app/page.module.css"
 
@@ -35,7 +35,7 @@ const Texts:Items = {
     }
 }
 
-const ItemsColors: Items ={
+var ItemsColors: Items ={
     "red":{
         "en":"Red",
         "th":"แดง"
@@ -62,7 +62,41 @@ const ItemsColors: Items ={
     }
 }
 
+const ItemsColorsPetg: Items ={
+    "yellow":{
+        "en":"Yellow",
+        "th":"เหลือง"
+    },
+}
+const ItemsColorsPla: Items ={
+    "green":{
+        "en":"Green",
+        "th":"เขียว"
+    },
+    "white":{
+        "en":"White",
+        "th":"ขาว"
+    }
+}
+const ItemsEmpty: Items ={
+
+}
+
+
+const ItemsMaterial: Items = {
+    "petg": {
+        "en": "petg",
+        "th": "petg"
+    },
+    "pla": {
+        "en": "pla",
+        "th": "pla"
+    }
+}
+
 export default function Order(props:OrderProps){
+
+    const [itemColor, setItemColor] = useState<Items>(ItemsEmpty)
 
     const [file, setFile]= useState<File|null>(null)
     
@@ -71,7 +105,27 @@ export default function Order(props:OrderProps){
     const orderHandle = async (e:React.FormEvent) => {
             e.preventDefault()
             
+            var localColor = localStorage.getItem("color")            
+            var localMaterial = localStorage.getItem("material") 
+            if (localColor == null ){
+                localColor = ""
+            } 
+            if (localMaterial == null ){
+                localMaterial = ""
+            }           
+            
+            if (localColor == "") {
+                await Swal.fire("Please select color !")
+                return
+            }
+            if (localMaterial == "") {
+                await Swal.fire("Please select material !")
+                return
+            }
+
             var fd = new FormData()
+            fd.append("Color", localColor)
+            fd.append("Material", localMaterial)
             fd.append('Content', cnt)
             if (file != null) {
                 fd.append('File', file)
@@ -80,7 +134,7 @@ export default function Order(props:OrderProps){
                 return
             }
             // console.log(fd)
-            const res = await fetch("https://3d.pluemtnt.com/order", {
+            const res = await fetch("http://192.168.88.245:7200/order"/*"https://3d.pluemtnt.com/order"*/, {
                 method: "POST",
                 headers: {
                     // "Content-Type":"application/json",
@@ -98,6 +152,20 @@ export default function Order(props:OrderProps){
             })
     
         }
+    useEffect(()=>{
+        setInterval(()=>{
+            let localMaterial = localStorage.getItem("material")
+            if (localMaterial=="petg") {
+                setItemColor(ItemsColorsPetg)
+            }
+            else if (localMaterial=="pla") {
+                setItemColor(ItemsColorsPla)
+            }
+            else {
+                setItemColor(ItemsEmpty)
+            }
+        }, 99)
+    }, [])
 
     return props.token != "" ? <div className={Mc.Card}>
             <h1>Order</h1>
@@ -110,17 +178,18 @@ export default function Order(props:OrderProps){
                 <div className={Mc.GroupCol}>
                     <div>
                         <div className={Mc.Topic}>
-                            <label>{Texts.color[props.lang]}</label>
-                        </div>
-                        <Sel name="color" items={ItemsColors} lang={props.lang}/>
-                    </div>
-                    <div>
-                        <div className={Mc.Topic}>
                         <label >{Texts.material[props.lang]}</label>
 
                         </div>
-                        <Sel name="material" items={ItemsColors} lang={props.lang}/>
+                        <Sel name="material" items={ItemsMaterial} lang={props.lang}/>
                     </div>
+                    <div>
+                        <div className={Mc.Topic}>
+                            <label>{Texts.color[props.lang]}</label>
+                        </div>
+                        <Sel name="color" items={itemColor} lang={props.lang}/>
+                    </div>
+                    
                 </div>
 
 				<textarea name="cnt" id="order" placeholder="..."
