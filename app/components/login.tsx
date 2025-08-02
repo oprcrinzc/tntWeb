@@ -31,14 +31,17 @@ export default function Order(props:OrderPeops){
         props.lang = "en"
     }
 
-    const [token, setToken] = useState("")
-        const [name, setName] = useState("")
-        const [pwd, setPwd] = useState("")
-        
+	const [name, setName] = useState("")
+	const [pwd, setPwd] = useState("")
+    
+	const ExitHandle = async () => {
+		console.log("Exittt")
+		localStorage.removeItem("token")
+	}
     const handle = async (e:React.FormEvent) => {
 		e.preventDefault()
 		try {
-			const res = await fetch("https://3d.pluemtnt.com/login", {
+			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ "http://192.168.88.245:7200/login", {
 				method: "POST",
 				headers: {
 					"Content-Type":"application/json"
@@ -52,16 +55,13 @@ export default function Order(props:OrderPeops){
 			if (!res.ok) throw new Error("server error")
 			const data = await res.json()
 		localStorage.setItem("token", data)
-			setToken(data)
 
 		} catch(err) {
 			console.log(err)
-			setToken("")
 		}
 	}
     
-    return (<div >
-        { token == "" ? <div className={clsx(Mc.Card, Mc.Login)}><h1>Login</h1>
+    return props.token == "" ? <div className={clsx(Mc.Card, Mc.Login)}><h1>Login</h1>
 		<form onSubmit={handle}>
 			<label htmlFor="name">{Texts.name[props.lang]}</label>
 			<input type="text" name="" id="name" 
@@ -75,8 +75,11 @@ export default function Order(props:OrderPeops){
 				setPwd(e.target.value)
 			}}/>
 			<input type="submit" value={Texts.send[props.lang]} />
-		</form></div> : ""
-		}
-		<h1>{token}</h1>
-    </div>)
+		</form></div> : <div className={clsx(Mc.Card, Mc.Welcome)}>
+			<h1>Welcome</h1>
+			<h1 className={Mc.Darker}>[{name}]</h1>
+			<p onClick={ExitHandle}>Exit</p>
+		</div>
+		
+
 }

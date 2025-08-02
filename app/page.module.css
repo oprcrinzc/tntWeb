@@ -63,10 +63,41 @@
     gap: .2rem;
 }
 .Container {
-    align-items: center;
-    padding: 1rem 1rem;
+    
+    /* padding: 5rem 20rem; */
+    padding: 1rem calc(100vw/50);
+	
+
 }
 
 .Login input{
     font-size: 1.5rem;
+}
+.Login {
+    width: max-content;
+    align-self: center;
+    margin-top: 10rem;
+}
+
+.Welcome {
+    flex-direction: row;
+    padding: 1rem 1rem;
+    gap: 1rem;
+}
+.Welcome p {
+    margin-left: auto;
+    align-self: center;
+    color: rgb(233, 19, 19);
+    text-decoration:underline;
+    font-size: 1.6rem;
+    user-select: none;
+    font-weight: bolder;
+}
+.Welcome p:hover{
+    cursor:pointer;
+    color: rgb(255, 153, 153);
+}
+
+.Darker {
+    filter: brightness(60%);
 }

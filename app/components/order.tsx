@@ -65,7 +65,7 @@ export default function Order(props:OrderPeops){
     
         }
 
-    return (<div className={Mc.Card}>
+    return props.token != "" ? <div className={Mc.Card}>
             <h1>Order</h1>
 			<form onSubmit={orderHandle}>
 				<input type="file" name="file" id="" 
@@ -79,5 +79,5 @@ export default function Order(props:OrderPeops){
                 <input type="submit" value="Send" />
 			</form>
             
-    </div>)
+    </div>:""
 }

@@ -15,10 +15,16 @@ export default function Home() {
 	const [lang, setLang] = useState("en")
 
 	useEffect(()=>{
-		const localToken = localStorage.getItem("token")
-		if (localToken!= null)  {
-			setToken(localToken)
-		}
+		setInterval(()=>{
+			const localToken = localStorage.getItem("token")
+			if (localToken!= null)  {
+				setToken(localToken)
+			} else {
+				setToken("")
+			}
+			console.log("finding")
+		}, 200)
+		
 	}, [])
 
   return (
