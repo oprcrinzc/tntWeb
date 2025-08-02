@@ -65,10 +65,13 @@
 .Container {
     
     /* padding: 5rem 20rem; */
-    padding: 1rem calc(100vw/50);
-	
-
+    padding: 1rem calc(100vw/3);
 }
+
+@media only screen and (max-width: 1200px) {.Container {padding: 1rem calc(100vw/7);}}
+@media only screen and (max-width: 900px) {.Container {padding: 1rem calc(100vw/15);}}
+@media only screen and (max-width: 600px) {.Container {padding: 1rem calc(100vw/100);}}
+
 
 .Login input{
     font-size: 1.5rem;
@@ -95,7 +98,10 @@
 }
 .Welcome p:hover{
     cursor:pointer;
-    color: rgb(255, 153, 153);
+    color: aliceblue;
+    /* color: rgb(255, 153, 153); */
+    backdrop-filter: brightness(60%);
+    padding: 0rem 1rem;
 }
 
 .Darker {
@@ -121,9 +127,9 @@
     backdrop-filter: brightness(60%);
     color: aliceblue;
 }
-.SelDark {backdrop-filter: brightness(80%);}
+.SelDark {backdrop-filter: brightness(95%);}
 .SelBright {backdrop-filter: brightness(100%);}
-
+.Seled {backdrop-filter: brightness(50%);color: aliceblue;}
 
 /* Group */
 .GroupCol {

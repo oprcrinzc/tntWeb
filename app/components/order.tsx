@@ -112,14 +112,14 @@ export default function Order(props:OrderProps){
                         <div className={Mc.Topic}>
                             <label>{Texts.color[props.lang]}</label>
                         </div>
-                        <Sel items={ItemsColors} lang={props.lang}/>
+                        <Sel name="color" items={ItemsColors} lang={props.lang}/>
                     </div>
                     <div>
                         <div className={Mc.Topic}>
                         <label >{Texts.material[props.lang]}</label>
 
                         </div>
-                        <Sel items={ItemsColors} lang={props.lang}/>
+                        <Sel name="material" items={ItemsColors} lang={props.lang}/>
                     </div>
                 </div>
 

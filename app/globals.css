@@ -4,6 +4,7 @@
 	font-family: "Google Sans Code", monospace;
 	font-style: normal;
 	font-optical-sizing: auto;
+	transition: .2s;
 }
 
 body {
@@ -19,4 +20,8 @@ html, body {
 	backdrop-filter: blur(10px);
 	padding: 0;
 	margin: 0;
+}
+
+textarea {
+	transition: 0s;
 }
