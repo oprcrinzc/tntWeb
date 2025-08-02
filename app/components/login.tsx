@@ -5,9 +5,12 @@ import Swal from "sweetalert2"
 import Mc from "@/app/page.module.css"
 import clsx from "clsx"
 
-type OrderPeops = {
+import {Lang} from "@/app/types/types"
+
+type OrderProps = {
     token: string
-    lang: string
+    lang: Lang
+	name: any
 }
 
 const Texts = {
@@ -23,13 +26,23 @@ const Texts = {
         "en": "Send",
         "th": "ส่ง"
     },
+	"exit": {
+		"en":"Exit",
+		"th":"ออก"
+	},
+	"welcome": {
+		"en":"Welcome",
+		"th":"ยินดีต้อนรับ"
+	},
+	"login": {
+		"en":"Login",
+		"th":"เข้าสู่ระบบ"
+	}
 }
 
-export default function Order(props:OrderPeops){
-    
-    if (props.lang == null) {
-        props.lang = "en"
-    }
+export default function Order(props:OrderProps){
+
+	props.lang = props.lang == null ? "en": props.lang
 
 	const [name, setName] = useState("")
 	const [pwd, setPwd] = useState("")
@@ -55,13 +68,14 @@ export default function Order(props:OrderPeops){
 			if (!res.ok) throw new Error("server error")
 			const data = await res.json()
 		localStorage.setItem("token", data)
+		localStorage.setItem("name", name)
 
 		} catch(err) {
 			console.log(err)
 		}
 	}
     
-    return props.token == "" ? <div className={clsx(Mc.Card, Mc.Login)}><h1>Login</h1>
+    return props.token == "" ? <div className={clsx(Mc.Card, Mc.Login)}><h1>{Texts.login[props.lang]}</h1>
 		<form onSubmit={handle}>
 			<label htmlFor="name">{Texts.name[props.lang]}</label>
 			<input type="text" name="" id="name" 
@@ -76,9 +90,9 @@ export default function Order(props:OrderPeops){
 			}}/>
 			<input type="submit" value={Texts.send[props.lang]} />
 		</form></div> : <div className={clsx(Mc.Card, Mc.Welcome)}>
-			<h1>Welcome</h1>
-			<h1 className={Mc.Darker}>[{name}]</h1>
-			<p onClick={ExitHandle}>Exit</p>
+			<h1>{Texts.welcome[props.lang]}</h1>
+			<h1 className={Mc.Darker}>[{props.name}]</h1>
+			<p onClick={ExitHandle}>{Texts.exit[props.lang]}</p>
 		</div>
 		
 

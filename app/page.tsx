@@ -7,30 +7,30 @@ import Order from "./components/order";
 import Login from "./components/login"
 import Swal from "sweetalert2";
 import Mc from "@/app/page.module.css"
+import {Lang} from "@/app/types/types"
+
 
 
 export default function Home() {
 	const [token, setToken] = useState("")
-
-	const [lang, setLang] = useState("en")
+	const [lang, setLang] = useState<Lang>("en")
+	const [name, setName] = useState("")
 
 	useEffect(()=>{
 		setInterval(()=>{
+			const localName = localStorage.getItem("name")
 			const localToken = localStorage.getItem("token")
-			if (localToken!= null)  {
-				setToken(localToken)
-			} else {
-				setToken("")
-			}
+			setToken(localToken != null ? localToken : "")
+			setName(localName != null ? localName : "")
 			console.log("finding")
-		}, 200)
+		}, 199)
 		
 	}, [])
 
   return (
 	<div className={Mc.Container}>
 		<div className={Mc.Home}>
-			<Login token={token} lang={lang}/>
+			<Login token={token} lang={lang} name={name}/>
 			<Order token={token} lang={lang}/>
 		</div>
 	</div>

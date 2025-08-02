@@ -4,9 +4,11 @@ import { useState } from "react"
 import Swal from "sweetalert2"
 import Mc from "@/app/page.module.css"
 
-type OrderPeops = {
+import {Lang} from "@/app/types/types"
+
+type OrderProps = {
     token: string
-    lang: string
+    lang: Lang
 }
 
 const Texts = {
@@ -24,7 +26,7 @@ const Texts = {
     },
 }
 
-export default function Order(props:OrderPeops){
+export default function Order(props:OrderProps){
     
     if (props.lang == null) {
         props.lang = "en"
@@ -71,12 +73,12 @@ export default function Order(props:OrderPeops){
 				<input type="file" name="file" id="" 
                 onChange={(e)=>{setFile(e.target.files?.[0] ?? null)}}/>
 
-                <label htmlFor="order">{Texts['detail'][props.lang]}</label>
+                <label htmlFor="order">{Texts.detail[props.lang]}</label>
 
 				<textarea name="cnt" id="order" placeholder="..."
                 onChange={(e)=>{setCnt(e.target.value)}}/>
 				
-                <input type="submit" value="Send" />
+                <input type="submit" value={Texts.send[props.lang]} />
 			</form>
             
     </div>:""
