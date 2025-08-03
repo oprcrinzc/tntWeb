@@ -7,7 +7,8 @@ import Order from "./components/order";
 import Login from "./components/login"
 import Swal from "sweetalert2";
 import Mc from "@/app/page.module.css"
-import {Lang} from "@/app/types/types"
+import {Lang, LangParse} from "@/app/types/types"
+import Orders from "./components/orders";
 
 
 
@@ -18,13 +19,22 @@ export default function Home() {
 	const [name, setName] = useState("")
 
 	useEffect(()=>{
-		setInterval(()=>{
+		setInterval(async ()=>{
+			// load data from localStorage
 			const localName = localStorage.getItem("name")
 			const localToken = localStorage.getItem("token")
+			const localLang = localStorage.getItem("lang")
 			setToken(localToken != null ? localToken : "")
 			setName(localName != null ? localName : "")
-			// console.log("finding")
-		}, 199)
+			setLang((localLang != null || localLang != "") ? LangParse(localLang) : "en")
+			
+			localStorage.setItem("token", localToken == null ? "" : localToken)
+			localStorage.setItem("name", localName == null ? "" : localName)
+			localStorage.setItem("lang", (localLang == null || localLang == "") ? "en" : LangParse(localLang))
+
+			// console.log(localLang, localName, localToken)
+
+		}, 128)
 		
 	}, [])
 
@@ -33,7 +43,7 @@ export default function Home() {
 		<div className={Mc.Home}>
 			<Login token={token} lang={lang} name={name}/>
 			<Order token={token} lang={lang}/>
-			
+			<Orders token={token} lang={lang}/>
 		</div>
 	</div>
   );

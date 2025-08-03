@@ -61,6 +61,8 @@
     display: flex;
     flex-direction: column;
     gap: .2rem;
+    -webkit-filter: opacity(80%);
+	filter: opacity(80%);
 }
 .Container {
     
@@ -83,11 +85,12 @@
 }
 
 .Welcome {
+    display: flex;
     flex-direction: row;
     padding: 1rem 1rem;
     gap: 1rem;
 }
-.Welcome p {
+.Welcome .Exit {
     margin-left: auto;
     align-self: center;
     color: rgb(233, 19, 19);
@@ -96,23 +99,38 @@
     user-select: none;
     font-weight: bolder;
 }
-.Welcome p:hover{
+.Welcome .Exit:hover{
     cursor:pointer;
     color: aliceblue;
     /* color: rgb(255, 153, 153); */
     backdrop-filter: brightness(60%);
+    -webkit-backdrop-filter: brightness(60%);
     padding: 0rem 1rem;
+}
+.Welcome .Container {
+    padding: 0;
+    align-content: center;
+    border: solid black .15rem;
+    border-radius: .4rem;
+    overflow: hidden;
+}
+.Welcome .Sel {
+    display: inline-flex;
+}
+.Welcome .Sel > * {
+    padding: .7rem .5rem;
 }
 
 .Darker {
     filter: brightness(60%);
+    -webkit-filter: brightness(60%);
 }
 
 
 
 /* Selector */
 .Sel {
-    background-color: aliceblue;
+    background-color: rgb(240, 248, 255);
     display: flex;
     flex-direction: column;
     
@@ -124,11 +142,12 @@
 }
 .Sel > *:hover {
     cursor: pointer;
+    -webkit-backdrop-filter: brightness(60%);
     backdrop-filter: brightness(60%);
     color: aliceblue;
 }
-.SelDark {backdrop-filter: brightness(95%);}
-.SelBright {backdrop-filter: brightness(100%);}
+.SelDark {backdrop-filter: brightness(90%);-webkit-backdrop-filter: brightness(90%);}
+.SelBright {backdrop-filter: brightness(100%);-webkit-backdrop-filter: brightness(100%);}
 .Seled {backdrop-filter: brightness(50%);color: aliceblue;}
 
 /* Group */

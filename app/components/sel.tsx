@@ -1,14 +1,10 @@
 'use client'
 import clsx from "clsx";
-import { Lang, Items } from "../types/types";
+import { Lang, Items, SelProps } from "../types/types";
 import Mc from "@/app/page.module.css"
 import { useEffect, useState } from "react";
 
-type SelProps ={
-    items: Items
-    lang: Lang
-    name: string
-}
+
 
 export default function Sel(props:SelProps){
     const [seled, SetSeled] = useState(-1)
@@ -27,24 +23,21 @@ export default function Sel(props:SelProps){
             // console.log(Number(localSeled))
         },99)
     },[])
-    return (<div>
-        {
-            props.items == null ? "" : 
-            Object.entries(props.items).map(([key, value], index)=>{
-                return <div key={key} className={Mc.Sel}>
-                    <p onClick={()=>{handle(index, key)}} 
-                        className={
-                            clsx(
-                                index%2==0 && Mc.SelDark, 
-                                index%2!=0 && Mc.SelBright,
-                                index==seled && Mc.Seled
-                            )
-                        }>
-                        {value[props.lang]}</p>
-                </div>
-            })
+
+    return props.items == null ? "" : 
+    Object.entries(props.items).map(([key, value], index)=>{
+        return <div key={key} className={Mc.Sel}>
+            <p onClick={()=>{handle(index, key)}} 
+                className={
+                    clsx(
+                        index%2==0 && Mc.SelDark, 
+                        index%2!=0 && Mc.SelBright,
+                        index==seled && Mc.Seled
+                    )
+                }>
+                {value[props.lang]}</p>
+        </div>
+    })
             
-        }
         
-    </div>)
 }

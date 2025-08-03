@@ -4,13 +4,13 @@ import { useEffect, useState } from "react"
 import Swal from "sweetalert2"
 import Mc from "@/app/page.module.css"
 
-import {Items, Lang} from "@/app/types/types"
+import {Items, Lang, OrderProps} from "@/app/types/types"
 import Sel from "@/app/components/sel";
 
-type OrderProps = {
-    token: string
-    lang: Lang
-}
+// type OrderProps = {
+//     token: string
+//     lang: Lang
+// }
 
 const Texts:Items = {
     "chooseFile": {
@@ -187,16 +187,19 @@ export default function Order(props:OrderProps){
                 <div className={Mc.GroupCol}>
                     <div>
                         <div className={Mc.Topic}>
-                        <label >{Texts.material[props.lang]}</label>
-
+                            <label >{Texts.material[props.lang]}</label>
                         </div>
-                        <Sel name="material" items={ItemsMaterial} lang={props.lang}/>
+                        <div>
+                            <Sel name="material" items={ItemsMaterial} lang={props.lang}/>
+                        </div>
                     </div>
                     <div>
                         <div className={Mc.Topic}>
                             <label>{Texts.color[props.lang]}</label>
                         </div>
-                        <Sel name="color" items={itemColor} lang={props.lang}/>
+                        <div>
+                            <Sel name="color" items={itemColor} lang={props.lang}/>
+                        </div>
                     </div>
                     
                 </div>

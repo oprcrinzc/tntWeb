@@ -5,15 +5,12 @@ import Swal from "sweetalert2"
 import Mc from "@/app/page.module.css"
 import clsx from "clsx"
 
-import {Lang} from "@/app/types/types"
+import {Items, Lang, LoginProps} from "@/app/types/types"
+import Sel from "./sel"
 
-type OrderProps = {
-    token: string
-    lang: Lang
-	name: any
-}
 
-const Texts = {
+
+const Texts:Items = {
     "name": {
         "en": "name",
         "th": "ชื่อ"
@@ -40,7 +37,18 @@ const Texts = {
 	}
 }
 
-export default function Order(props:OrderProps){
+const LangItems :Items = {
+	"en":{
+		"en":"eng",
+		"th":"อังกิด"
+	},
+	"th":{
+		"en":"thai",
+		"th":"ไทย"
+	},			
+}
+
+export default function Order(props:LoginProps){
 
 	const [name, setName] = useState("")
 	const [pwd, setPwd] = useState("")
@@ -49,6 +57,7 @@ export default function Order(props:OrderProps){
 		console.log("Exittt")
 		localStorage.clear()
 	}
+
     const handle = async (e:React.FormEvent) => {
 		e.preventDefault()
 		try {
@@ -82,15 +91,16 @@ export default function Order(props:OrderProps){
 			}}/>
 			<label htmlFor="password">{Texts.password[props.lang]}</label>
 
-			<input type="password" name="" id="password" 
-			onChange={(e)=>{
-				setPwd(e.target.value)
-			}}/>
-			<input type="submit" value={Texts.send[props.lang]} />
+			<input type="password" name="" id="password" onChange={(e)=>{setPwd(e.target.value)}}/>
+	
+			<input type="submit" value={Texts.send[props.lang] || ""} />
 		</form></div> : <div className={clsx(Mc.Card, Mc.Welcome)}>
 			<h1>{Texts.welcome[props.lang]}</h1>
 			<h1 className={Mc.Darker}>[{props.name}]</h1>
-			<p onClick={ExitHandle}>{Texts.exit[props.lang]}</p>
+			<div className={Mc.Container}>
+				<Sel name="lang" lang={props.lang} items={LangItems}/>
+			</div>
+			<p className={Mc.Exit} onClick={ExitHandle}>{Texts.exit[props.lang]}</p>
 		</div>
 		
 
