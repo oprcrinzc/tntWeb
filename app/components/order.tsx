@@ -32,6 +32,10 @@ const Texts:Items = {
     "material": {
         "en": "Materials",
         "th":"วัสดุ"
+    },
+    "order":{
+        "en":"Order",
+        "th":"สั่ง"
     }
 }
 
@@ -163,12 +167,17 @@ export default function Order(props:OrderProps){
             }
             else {
                 setItemColor(ItemsEmpty)
+                
             }
         }, 99)
     }, [])
+    useEffect(()=>{
+        localStorage.setItem("color", "")
+        localStorage.setItem("color_seled", "-1")
+    }, [itemColor])
 
     return props.token != "" ? <div className={Mc.Card}>
-            <h1>Order</h1>
+            <h1>{Texts.order[props.lang]}</h1>
 			<form onSubmit={orderHandle}>
 				<input type="file" name="file" id="" 
                 onChange={(e)=>{setFile(e.target.files?.[0] ?? null)}}/>
