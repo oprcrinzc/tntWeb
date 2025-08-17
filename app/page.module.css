@@ -67,12 +67,16 @@
 .Container {
     
     /* padding: 5rem 20rem; */
-    padding: 1rem calc(100vw/3);
+    padding: 1rem calc(100vw/7);
 }
 
-@media only screen and (max-width: 1200px) {.Container {padding: 1rem calc(100vw/7);}}
-@media only screen and (max-width: 900px) {.Container {padding: 1rem calc(100vw/15);}}
-@media only screen and (max-width: 600px) {.Container {padding: 1rem calc(100vw/100);}}
+@media only screen and (max-width: 1200px) {.Container {padding: 1rem calc(100vw/8);}}
+@media only screen and (max-width: 900px) {.Container {padding: 1rem calc(100vw/17);}}
+@media only screen and (max-width: 600px) {
+    .Container {padding: 1rem calc(100vw/100);}
+    .Welcome .Container {width: min-content;}
+    .Welcome .Sel {width: 5.4rem;}
+}
 
 
 .Login input{

@@ -8,6 +8,7 @@ import clsx from "clsx"
 import {Items, Lang, LoginProps} from "@/app/types/types"
 import Sel from "./sel"
 
+import dotenv from "dotenv"
 
 
 const Texts:Items = {
@@ -49,6 +50,8 @@ const LangItems :Items = {
 }
 
 export default function Order(props:LoginProps){
+	const login_uri = process.env.NEXT_PUBLIC_LOGIN_TEST_URI
+	console.log(login_uri)
 
 	const [name, setName] = useState("")
 	const [pwd, setPwd] = useState("")
@@ -61,7 +64,7 @@ export default function Order(props:LoginProps){
     const handle = async (e:React.FormEvent) => {
 		e.preventDefault()
 		try {
-			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ "http://192.168.88.245:7200/login", {
+			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ login_uri , {
 				method: "POST",
 				headers: {
 					"Content-Type":"application/json"
