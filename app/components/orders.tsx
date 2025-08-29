@@ -28,21 +28,24 @@ export default function Orders(props:OrdersProps){
                 })
                 let f = await res.json()
                 setOrders([])
-                let newOrders:TypeOrder[] = []
-                for (let i=0;i<(f.length);i++) {
-                    let newOrder:TypeOrder ={
-                        Time: f[i].Time?f[i].Time:"",
-                        Customer: f[i].Customer?f[i].Customer:"",
-                        Content: f[i].Content?f[i].Content:"",
-                        File: f[i].File?f[i].File:"",
-                        Color: f[i].Color?f[i].Color:"",
-                        Material: f[i].Material?f[i].Material:"",
-                        Status: f[i].Status?f[i].Status:""
+                if (f != "NULL") {
+                    let newOrders:TypeOrder[] = []
+                    for (let i=0;i<(f.length);i++) {
+                        let newOrder:TypeOrder ={
+                            Time: f[i].Time?f[i].Time:"",
+                            Customer: f[i].Customer?f[i].Customer:"",
+                            Content: f[i].Content?f[i].Content:"",
+                            File: f[i].File?f[i].File:"",
+                            Color: f[i].Color?f[i].Color:"",
+                            Material: f[i].Material?f[i].Material:"",
+                            Status: f[i].Status?f[i].Status:""
+                        }
+                        await newOrders.push(newOrder)
                     }
-                    await newOrders.push(newOrder)
+                    await setOrders(newOrders)
                 }
+                
                 // console.log(newOrders)
-                await setOrders(newOrders)
             }
             
         },1000)
