@@ -20,6 +20,10 @@ const Texts:Items = {
         "en": "password",
         "th": "รหัสผ่าน"
     },
+	"email": {
+        "en": "email",
+        "th": "จดหมายอิเล็กทรอนิกส์"
+    },
     "send": {
         "en": "Send",
         "th": "ส่ง"
@@ -35,6 +39,10 @@ const Texts:Items = {
 	"login": {
 		"en":"Login",
 		"th":"เข้าสู่ระบบ"
+	},
+	"register": {
+		"en":"Register",
+		"th":"ลงทะเบียน"
 	}
 }
 
@@ -55,6 +63,10 @@ export default function Order(props:LoginProps){
 
 	const [name, setName] = useState("")
 	const [pwd, setPwd] = useState("")
+
+	const [regName, setRegName] = useState("")
+	const [regPwd, setRegPwd] = useState("")
+	const [regEmail, setRegEmail] = useState("")
     
 	const ExitHandle = async () => {
 		console.log("Exittt")
@@ -85,6 +97,34 @@ export default function Order(props:LoginProps){
 			console.log(err)
 		}
 	}
+
+	const handleReg = async (e:React.FormEvent) => {
+		e.preventDefault()
+		// console.log(process.env.NEXT_PUBLIC_LOGIN_TEST_URI)
+		try {
+			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ process.env.NEXT_PUBLIC_REGISTER_TEST_URI , {
+				method: "POST",
+				headers: {
+					"Content-Type":"application/json"
+				},
+				body: JSON.stringify({
+					Name: regName,
+					Password: regPwd,
+					Email: regEmail,
+				})
+			})
+
+			if (!res.ok) throw new Error("server error")
+			const data = await res.json()
+			Swal.fire("Success\nLEt login")
+
+		// localStorage.setItem("token", data)
+		// localStorage.setItem("name", name)
+
+		} catch(err) {
+			console.log(err)
+		}
+	}
     
     return props.token == "" ? <div className={clsx(Mc.Card, Mc.Login)}><h1>{Texts.login[props.lang]}</h1>
 		<form onSubmit={handle}>
@@ -96,6 +136,19 @@ export default function Order(props:LoginProps){
 			<label htmlFor="password">{Texts.password[props.lang]}</label>
 
 			<input type="password" name="" id="password" onChange={(e)=>{setPwd(e.target.value)}}/>
+	
+			<input type="submit" value={Texts.send[props.lang] || ""} />
+		</form><h1>{Texts.register[props.lang]}</h1> <form onSubmit={handleReg}>
+			<label htmlFor="name">{Texts.name[props.lang]}</label>
+			<input type="text" name="" id="name" 
+			onChange={(e)=>{
+				setRegName(e.target.value)
+			}}/>
+			<label htmlFor="password">{Texts.password[props.lang]}</label>
+
+			<input type="password" name="" id="password" onChange={(e)=>{setRegPwd(e.target.value)}}/>
+			<label htmlFor="email">{Texts.email[props.lang]}</label>
+			<input type="email" name="" id="email" onChange={(e)=>{setRegEmail(e.target.value)}}/>
 	
 			<input type="submit" value={Texts.send[props.lang] || ""} />
 		</form></div> : <div className={clsx(Mc.Card, Mc.Welcome)}>
