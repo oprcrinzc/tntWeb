@@ -6,7 +6,7 @@ import Mc from "@/app/page.module.css"
 
 import {Items, Lang, OrderProps} from "@/app/types/types"
 import Sel from "@/app/components/sel";
-
+import { loadEnvConfig } from '@next/env'
 // type OrderProps = {
 //     token: string
 //     lang: Lang
@@ -99,6 +99,7 @@ const ItemsMaterial: Items = {
 }
 
 export default function Order(props:OrderProps){
+    
 
     const [itemColor, setItemColor] = useState<Items>(ItemsEmpty)
 
@@ -169,6 +170,7 @@ export default function Order(props:OrderProps){
                 setItemColor(ItemsEmpty)
                 
             }
+            // console.log(process.env.NEXT_PUBLIC_ORDER_TEST_URI)
         }, 99)
     }, [])
     useEffect(()=>{
