@@ -17,6 +17,19 @@ export type OrderProps = {
     lang: Lang
 }
 
+export type Order = {
+    Time:number
+    Customer:string
+    Content:string
+    File:Array<string>
+    Color:string
+    Material:string
+    Status:string
+}
+
+export type Orders = Record<number, Order>
+
+
 export type SelProps ={
     items: Items
     lang: Lang

@@ -129,7 +129,9 @@
     filter: brightness(60%);
     -webkit-filter: brightness(60%);
 }
-
+.DarkerBG {
+    background-color: rgb(219, 219, 219) !important;
+}
 
 
 /* Selector */
@@ -176,4 +178,17 @@
 .GroupCol .Topic > * {
     flex-grow: 1;
     align-content: center;
+}
+
+.OrdersList {
+    background-color: aliceblue;
+    display: flex;
+    gap: 1rem;
+    padding: .3rem 1.6rem;
+}
+.OrdersList :last-child {
+    margin-left: auto;
+}
+.OrdersList:hover {
+    cursor: pointer;
 }
