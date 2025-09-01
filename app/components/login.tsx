@@ -77,7 +77,7 @@ export default function Order(props:LoginProps){
 		e.preventDefault()
 		// console.log(process.env.NEXT_PUBLIC_LOGIN_TEST_URI)
 		try {
-			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ process.env.NEXT_PUBLIC_LOGIN_TEST_URI , {
+			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ process.env.NEXT_PUBLIC_LOGIN_URI , {
 				method: "POST",
 				headers: {
 					"Content-Type":"application/json"
@@ -102,7 +102,7 @@ export default function Order(props:LoginProps){
 		e.preventDefault()
 		// console.log(process.env.NEXT_PUBLIC_LOGIN_TEST_URI)
 		try {
-			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ process.env.NEXT_PUBLIC_REGISTER_TEST_URI , {
+			const res = await fetch(/*"https://3d.pluemtnt.com/login"*/ process.env.NEXT_PUBLIC_REGISTER_URI , {
 				method: "POST",
 				headers: {
 					"Content-Type":"application/json"

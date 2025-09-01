@@ -19,6 +19,10 @@ export default function Home() {
 	const [name, setName] = useState("")
 
 	useEffect(()=>{
+        console.log(process.env.NEXT_PUBLIC_LOGIN_TEST_URI)
+    })
+
+	useEffect(()=>{
 		setInterval(async ()=>{
 			// load data from localStorage
 			const localName = localStorage.getItem("name")

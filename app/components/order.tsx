@@ -139,7 +139,7 @@ export default function Order(props:OrderProps){
                 return
             }
             // console.log(fd)
-            const res = await fetch( process.env.NEXT_PUBLIC_ORDER_TEST_URI/*"https://3d.pluemtnt.com/order"*/, {
+            const res = await fetch( process.env.NEXT_PUBLIC_ORDER_URI/*"https://3d.pluemtnt.com/order"*/, {
                 method: "POST",
                 headers: {
                     // "Content-Type":"application/json",

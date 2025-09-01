@@ -18,7 +18,7 @@ export type OrderProps = {
 }
 
 export type Order = {
-    Time:number
+    Time:string
     Customer:string
     Content:string
     File:Array<string>
@@ -40,4 +40,10 @@ export type LoginProps = {
     token: string
     lang: Lang
 	name: any
+}
+
+export type QrProps = {
+    token: string
+    lang: Lang
+    id: string
 }

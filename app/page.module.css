@@ -190,5 +190,16 @@
     margin-left: auto;
 }
 .OrdersList:hover {
+    /* cursor: pointer; */
+}
+
+.flexLine {
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.button:hover {
     cursor: pointer;
+    text-decoration: underline;
+    filter: brightness(60%);
 }

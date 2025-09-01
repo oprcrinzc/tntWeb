@@ -5,6 +5,7 @@ import { Lang, Items, OrdersProps, Orders as TypeOrders, Order as TypeOrder } fr
 import Mc from "@/app/page.module.css"
 import { processEnv } from "@next/env";
 import clsx from "clsx";
+import Qr from "./qr";
 
 const Texts:Items = {
     "orders": {
@@ -19,7 +20,7 @@ export default function Orders(props:OrdersProps){
         setInterval(async ()=>{
             let tok = localStorage.getItem("token")
             if (tok != "" ){
-                const res = await fetch(process.env.NEXT_PUBLIC_ORDERS_TEST_URI,{
+                const res = await fetch(process.env.NEXT_PUBLIC_ORDERS_URI,{
                     method:"GET",
                     headers: {
                         "Authorization": tok?tok:"",
@@ -62,8 +63,11 @@ export default function Orders(props:OrdersProps){
                             <div>{o.Time}</div>
                             <div></div>
                             <div></div>
-                            <div></div>
-                            <div>{o.Status}</div>
+                            <div className={Mc.flexLine}>
+                                <Qr token={props.token} lang={props.lang} id={o.Time}/>
+                                <div>{o.Status}</div>
+                            </div>
+                            
                             
                         </div>
                 ))
